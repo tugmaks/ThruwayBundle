@@ -2,25 +2,25 @@
 
 namespace Voryx\ThruwayBundle\Command;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Thruway\Peer\Client;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thruway\Transport\PawlTransportProvider;
 
-class ThruwayWorkerCommand extends ContainerAwareCommand
+class ThruwayWorkerCommand extends AbstractThruwayCommand
 {
 
     /**
-     * @var \Psr\Log\LoggerInterface $logger
+     * @var LoggerInterface $logger
      */
     private $logger;
 
     /**
      * Called by the Service Container.
      */
-    public function setLogger(\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -83,6 +83,7 @@ class ThruwayWorkerCommand extends ContainerAwareCommand
         } catch (\Exception $e) {
             $this->logger->critical('EXCEPTION:' . $e->getMessage());
             $output->writeln('EXCEPTION:' . $e->getMessage());
+            return $e->getCode() === 0 ? 1: $e->getCode();
         }
     }
 }

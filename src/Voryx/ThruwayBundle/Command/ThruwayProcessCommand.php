@@ -2,15 +2,13 @@
 
 namespace Voryx\ThruwayBundle\Command;
 
-use Psr\Log\NullLogger;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thruway\ClientSession;
 use Thruway\Connection;
-use Thruway\Logging\Logger;
 use Thruway\Transport\PawlTransportProvider;
 use Voryx\ThruwayBundle\Process\Command;
 use Voryx\ThruwayBundle\Process\ProcessManager;
@@ -20,7 +18,7 @@ use Voryx\ThruwayBundle\Process\ProcessManager;
  *
  * @package Voryx\ThruwayTestBundle\Command
  */
-class ThruwayProcessCommand extends ContainerAwareCommand
+class ThruwayProcessCommand extends AbstractThruwayCommand
 {
 
     /**
@@ -49,14 +47,14 @@ class ThruwayProcessCommand extends ContainerAwareCommand
     private $consoleCommand;
 
     /**
-     * @var \Psr\Log\LoggerInterface $logger
+     * @var LoggerInterface $logger
      */
     private $logger;
 
     /**
      * Called by the Service Container.
      */
-    public function setLogger(\Psr\Log\LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

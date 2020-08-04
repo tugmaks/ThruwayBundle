@@ -15,8 +15,9 @@ use Voryx\ThruwayBundle\Serialization\ArrayEncoder;
 use Voryx\ThruwayBundle\Serialization\StdClassNormalizer;
 use Voryx\ThruwayBundle\Tests\Fixtures\Person;
 use Voryx\ThruwayBundle\WampKernel;
+use PHPUnit\Framework\TestCase;
 
-class WampKernelTest extends \PHPUnit_Framework_TestCase
+class WampKernelTest extends TestCase
 {
 
     /** @var  Container */
@@ -28,7 +29,7 @@ class WampKernelTest extends \PHPUnit_Framework_TestCase
     /** @var  WampKernel */
     private $wampkernel;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
 
@@ -351,11 +352,10 @@ class WampKernelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \Exception
      */
     public function rpc_test_throw_exception()
     {
+        $this->expectException(\Exception::class);
         //Create the test controller and service
         $controller = new TestController();
         $this->container->set('some.controller.service', $controller);

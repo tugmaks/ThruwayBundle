@@ -91,8 +91,8 @@ class AnnotationConfigurationPass implements CompilerPassInterface
         }
 
         //Scan files in /Controller dir
-        $rootPath      = $container->getParameter('kernel.root_dir');
-        $controllerDir = $rootPath . '/Controller/';
+        $rootPath      = $container->getParameter('kernel.project_dir');
+        $controllerDir = $rootPath . '/src/Controller/';
 
         $finder = new Finder();
         try {

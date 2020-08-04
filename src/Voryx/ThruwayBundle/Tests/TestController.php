@@ -4,11 +4,11 @@
 namespace Voryx\ThruwayBundle\Tests;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Voryx\ThruwayBundle\Tests\Fixtures\Person;
 
 
-class TestController extends Controller
+class TestController extends AbstractController
 {
 
     /**

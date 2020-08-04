@@ -2,12 +2,11 @@
 
 namespace Voryx\ThruwayBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thruway\Transport\RatchetTransportProvider;
 
-class ThruwayRouterCommand extends ContainerAwareCommand
+class ThruwayRouterCommand extends AbstractThruwayCommand
 {
 
     /**
@@ -67,6 +66,7 @@ class ThruwayRouterCommand extends ContainerAwareCommand
         } catch (\Exception $e) {
             $this->logger->critical('EXCEPTION:' . $e->getMessage());
             $output->writeln('EXCEPTION:' . $e->getMessage());
+            return $e->getCode() === 0 ? 1: $e->getCode();
         }
     }
 }
